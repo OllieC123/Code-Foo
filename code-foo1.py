@@ -1,0 +1,170 @@
+# 1. How many ping pong balls would it take to fill an
+# average-sized school bus? Describe each step in your 
+# thought process.
+#
+# This question is not possible to answer, mostly because there are too many
+# variables and missing pieces of information. 
+# Instead of giving an arbitrary numeric value, I have outlined a series of
+# steps that I would use in order to find a very good approximation of the
+# actual value.
+#
+# 1) We have to define 'average-sized school bus'.
+#   Type C ('conventional') school buses are the most common large school bus.
+#
+#   We determine the 'average' in a statistical sense; that is, we take all
+#   Type C buses currently in use and determine the average interior volume.
+#
+#   We create a list: all Type C bus manufacturers 
+#   (since 1990; for simplicity's sake, assume buses have a 20+ year life span),
+#   the Type C bus models of those manufacturers,
+#   the interior length and width of each model (both in meters),
+#   the height from the floor to the ceiling of each model (meters),
+#       --The interior volume of buses are irregular but to find this value is
+#       too difficult and time-consuming to determine for each model; therefore
+#       we think of the bus as a cubic rectangle and use the interior cubic
+#       dimensions as a simpler alternative.
+#   total number of passenger seats in each model (for simplicity's sake, assume
+#   bus seats are uniform in size for all models),
+#   and how many of each model were sold in the USA (from 1990-present).
+###############################################################################
+#   EXAMPLE  
+###############################################################################
+#   manufacturer    model            length  width   height   seats   totalSold
+#
+#   Scholastic      Magic School Bus 10      2       2.5      26      52,000
+#   ...             ...              ...     ...     ...      ...     ...     
+###############################################################################
+#   With this list, we can determine the 'average' length, width, height, and
+#   interior volume of a Type C school bus.
+#
+#   avglength = SUM(length*totalSold)
+#       /SUM(totalSold)
+#
+#   avgwidth = SUM(width*totalSold)
+#       /SUM(totalSold)
+#
+#   avgheight = SUM(height*totalSold)
+#       /SUM(totalSold)
+#
+#   avgvolume = SUM(length*width*height*totalSold)/SUM(totalSold)
+#
+#   avgadjvolume = SUM((length*width*height-seats*SEATVOLUME)*totalSold)
+#       /SUM(totalSold)-DRIVERSEAT-COCKPIT+STEPS
+#
+#       -- avgadjvolume is the average volume adjusted for additional
+#       features in the bus geometry; 
+#
+#   * SUM is the sum of all values in the column
+#
+#   * SEATVOLUME is a measure of the volume of a passenger seat.
+#   * DRIVERSEAT is a measure of the volume of a driver seat.
+#   * COCKPIT is a measure of the volume of the dashboard, steering wheel,
+#       pedals, gear shifters, etc...
+#   * STEPS is a measure of the volume of the space between the steps and the
+#       floor.
+#       ** The above values are all found from a single sample of a Type C bus.
+#       ** They are treated as constant for simplicity.
+#
+# 2) Next we define 'ping-pong ball'.
+#   Although not explicitly stated, let us assume that the ping pong ball is
+#   inflated, and is the standard 40mm in diameter, or .04m. 
+#
+# 3) Assume ping pong balls are packed as densely as possible, since we are to
+#   'fill' the school bus.
+#
+#   Here we choose to pack the bus using a hexagonal-close packed scheme.
+#   We picture the bus as a rectangular prism with no additional geometry, 
+#   such as seats.
+#
+#   Ball packing algorithm based on hexagonal-close packed spheres:
+#       (A graphical representation can be found here:
+#           http://en.wikipedia.org/wiki/Close-packing_of_equal_spheres)
+#
+#   1. Determine how many balls can fit lengthwise from one corner to the
+#       corner across.
+#
+#       ballLowerRow1 = avglength/.04 (rounded down)
+#
+#   2. Determine how many balls can fit lengthwise on the adjacent row.
+#
+#       ballLowerRow2 = (avglength-(.04/2))/.04 (rounded down)
+#
+#           --We subtract (.04/2) because the adjacent row begins from the
+#           center of the first ball in the first row; in other words,
+#           we must subtract the radius of a ball from the length of the bus.
+#       
+#   3. Determine how many rows can fit by width.
+#       
+#       ballLowerNumRow = (avgwidth-.02)/(sqrt(3)*.02)+1 (rounded down)
+#
+#           --sqrt(3)*.02 is the distance from the center of row 1 to the
+#           center of row 2.
+#
+#   4. Determine the total number of balls that can fit on the floor.
+#
+#           (if ballLowerNumRow is even) = (ballLowerNumRow/2)*
+#                /                          (ballLowerRow1+ballLowerRow2)
+#               /
+#       ballLower        
+#               \
+#                \
+#           (else) = ((ballLowerNumRow-1)/2)*(ballLowerRow1+
+#                       ballLowerRow2)+ballLowerRow1
+#
+#   5. Repeat 1-4 for the layer above the floor.
+#       The 2 ball lengths determined for the floor will be the
+#       same for the above layer; however, the order will be switched.
+#
+#       ballUpperRow1 = ballLowerRow2,
+#       ballUpperRow2 = ballLowerRow1
+#
+#       The rows are calculated slightly differently.
+#       ballUpperNumRow = (avgwidth-(.02/sqrt(3))-.02)/(sqrt(3)*.02)+1
+#                               (rounded down)
+#
+#           --.02/sqrt(3) is the distance from the center of lower row 1 to
+#           the center of upper row 1.
+#
+#       Total number of balls that can fit on the upper layer:
+#
+#
+#           (if ballUpperNumRow is even) = (ballUpperNumRow/2)*
+#                /                          (ballUpperRow1+ballUpperRow2)
+#               /
+#       ballLower        
+#               \
+#                \
+#           (else) = ((ballUpperNumRow-1)/2)*(ballUpperRow1+
+#                       ballUpperRow2)+ballUpperRow1
+#
+#   6. Determine how many layers there are:
+#
+#       ballLayer = (avgheight-.02)/(sqrt(3)*.02)+1 (rounded down)
+#
+#           -- Same formula as 3.
+#
+#   7. Calculate total balls that can fit.
+#
+#           (if ballLayer is even) = (ballLayer/2)*
+#                /                          (ballUpper+ballLower)
+#               /
+#       ballTotal        
+#               \
+#                \
+#           (else) = ((ballLayer-1)/2)*(ballUpperRow1+
+#                       ballUpperRow2)+ballLower
+#
+#           -- Same formula as 4.
+#
+# 4) We take the ballTotal value and adjust it to the proportions of
+#   avgvolume/avgadjvolume (these were calculated in part (1)).
+#
+#   In other words we want to find adjustedBallTotal, where:
+#
+#       ballTotal/adjBallTotal = avgvolume/avgadjvolume
+#
+#   SO...
+#
+#   adjustedBallTotal = ballTotal*(avgadjvolume/avgvolume)
+#
+# This should give us our final (approximated) answer!   
