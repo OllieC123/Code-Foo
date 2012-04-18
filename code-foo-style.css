@@ -1,0 +1,207 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, font, img, ul, li {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body 
+{
+line-height: 1;
+}
+ol, ul 
+{
+	list-style: none;
+}
+
+:focus 
+{
+	outline: 0;
+}
+
+body 
+{
+	background-color:#98A5FF;
+	font-family: Georgia, Verdana, “Lucida Sans Unicode”, sans-serif;
+	font-size: 12px;
+	color: lightblack;
+}
+
+h1 /*top header*/
+{
+	width:100%;
+	background:white;
+	text-align:right;
+}
+
+
+
+h2 
+{
+	font-style: italic;
+	font-weight: normal;
+	line-height: 1.2em;
+}
+
+div#container 
+{
+	margin: 50px auto 0px auto; /* centered */
+	width: 60%;
+}
+
+.bubble 
+{
+	clear: both;
+	margin: 0px auto;
+	width: 80%;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+	position: relative;
+	z-index: 90; /* the stack order: displayed under ribbon rectangle (100) */
+}
+.bubble#menu
+{
+	margin:0% 4% 4% 4%;
+	width: 30%;
+	z-index:91;
+	box-outline:solid;	
+}
+.bubble#menu ul
+{
+	list-style-type:none;	
+	text-align:center;
+}
+.bubble#menu ul li
+{	
+}
+.bubble#menu ul li a
+{
+	display:block;
+	width:100%;
+}
+.bubble#menu ul li a:hover
+{
+	color:#999;	
+}
+.bubble#text
+{
+	margin: 0% 4% 4% 4%;
+	border-style:solid;
+	width:40%;
+}
+.rectangle 
+{
+	background: #DC1D10;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	height: 50px;
+	width: 100%;
+	position: relative;
+	left:-15px;
+	top: 30px;
+	float: left;
+	-moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+	z-index: 100; /* the stack order: foreground */
+}
+.rectangle h2 
+{
+	font-size: 30px;
+	color: #fff;
+	padding-top: 6px;
+	text-align: center;
+}
+.rectangle#navbar
+{	
+	left:0px;
+	top:0px;
+	margin-bottom:40px;
+}
+.rectangle#menu
+{	
+	height:10%;
+	left:0%;
+	top:0%;
+}
+.rectangle#menu h2
+{	
+	font-size:20px;
+}
+.rectangle ul
+{
+	list-style-type:none;
+	text-align: center;
+}
+.rectangle ul li
+{
+	display: inline;
+}
+.rectangle ul li a
+{	
+	padding: 2% 2%;
+	color:#fff;
+	font-size:30px;
+}
+.rectangle ul li a:hover
+{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color:#999;
+	text
+}
+.triangle-l 
+{
+	border-color: transparent #BA180C transparent transparent ;
+	border-style:solid;
+	border-width:15px;
+	height:0px;
+	width:0px;
+	position: relative;
+	left: -30px;
+	top: 65px;
+	z-index: -1; /* displayed under bubble */
+}
+
+.info 
+{
+	padding: 60px 25px 35px 25px;
+}
+
+.info h2 
+{
+	font-size: 20px;
+}
+
+.info p 
+{
+	padding-top: 10px;
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.info p a 
+{
+	color: #c4591e;
+	text-decoration: none;
+}
+
+
+div#main 
+{
+	margin: 100px auto 0px auto; /* centered */
+	width: 100%;
+}
+.mainbubble
+{
+	margin: 0px auto 0px auto;
+	width: 90%;
+	background:#FFF;
+	border-radius: 10px;
+	z-index:90;
+	
+}
