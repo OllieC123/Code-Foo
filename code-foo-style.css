@@ -4,7 +4,7 @@ a, font, img, ul, li {
 	padding: 0;
 	border: 0;
 	outline: 0;
-	font-size: 100%;
+	font-size: 1em;
 	vertical-align: baseline;
 	background: transparent;
 }
@@ -26,7 +26,7 @@ body
 {
 	background-color:#98A5FF;
 	font-family: Georgia, Verdana, “Lucida Sans Unicode”, sans-serif;
-	font-size: 12px;
+	font-size: 1em
 	color: lightblack;
 }
 
@@ -59,14 +59,15 @@ div#container
 	width: 80%;
 	background: #fff;
 	border-radius: 10px;
-	box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+	box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
 	position: relative;
 	z-index: 90; /* the stack order: displayed under ribbon rectangle (100) */
 }
 .bubble#menu
 {
-	margin:0% 4% 4% 4%;
-	width: 30%;
+	
+	margin:0% 5% 12% 5%;
+	width: 90%;
 	z-index:91;
 	box-outline:solid;	
 }
@@ -89,9 +90,10 @@ div#container
 }
 .bubble#text
 {
-	margin: 0% 4% 4% 4%;
+	float:left;
+	margin: 0% 5% 10% 5%;
 	border-style:solid;
-	width:40%;
+	width:90%;
 }
 .rectangle 
 {
@@ -104,33 +106,34 @@ div#container
 	left:-15px;
 	top: 30px;
 	float: left;
-	-moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
-  -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
-  -webkit-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+	box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
 	z-index: 100; /* the stack order: foreground */
 }
 .rectangle h2 
 {
-	font-size: 30px;
+	font-size: 2em;
 	color: #fff;
 	padding-top: 6px;
 	text-align: center;
+	height:relative;
 }
 .rectangle#navbar
 {	
 	left:0px;
 	top:0px;
 	margin-bottom:40px;
+	border-radius: 10px;
+	width: 100%;
 }
 .rectangle#menu
 {	
-	height:10%;
+	height:6%;
 	left:0%;
 	top:0%;
 }
 .rectangle#menu h2
 {	
-	font-size:20px;
+	font-size:1.4em;
 }
 .rectangle ul
 {
@@ -152,7 +155,6 @@ div#container
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	color:#999;
-	text
 }
 .triangle-l 
 {
@@ -174,7 +176,7 @@ div#container
 
 .info h2 
 {
-	font-size: 20px;
+	font-size: 2em;
 }
 
 .info p 
@@ -193,8 +195,22 @@ div#container
 
 div#main 
 {
-	margin: 100px auto 0px auto; /* centered */
-	width: 100%;
+	margin: 100px auto 100px auto; /* centered */
+	width: 90%;
+	
+}
+
+span#side
+{
+	float:left;
+	margin: 3% 2.5% 3% 2.5%; /* centered */
+	width: 30%;
+}
+span#content
+{
+	float:right;
+	margin: 3% 2.5% 3% 2.5%; /* centered */
+	width: 60%;
 }
 .mainbubble
 {
@@ -203,5 +219,12 @@ div#main
 	background:#FFF;
 	border-radius: 10px;
 	z-index:90;
+	
+}
+
+footer
+{
+	width:100%
+	background:#FFF;
 	
 }
