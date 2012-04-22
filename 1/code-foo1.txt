@@ -26,6 +26,9 @@
    total number of passenger seats in each model (for simplicity's sake, assume
    bus seats are uniform in size for all models),
    and how many of each model were sold in the USA (from 1990-present).
+
+
+
 ##############################################################################
    EXAMPLE  
 ##############################################################################
@@ -34,6 +37,9 @@
    Scholastic      Magic School Bus 10      2       2.5      26      52,000
    ...             ...              ...     ...     ...      ...     ...     
 ##############################################################################
+   
+
+
    With this list, we can determine the 'average' length, width, height, and
    interior volume of a Type C school bus.
 
