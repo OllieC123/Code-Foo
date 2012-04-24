@@ -91,9 +91,9 @@ div#container
 .bubble#text
 {
 	float:left;
-	margin: 0% 5% 10% 5%;
+	margin: 0% 2.5% 10% 2.5%;
 	border-style:solid;
-	width:90%;
+	width:95%;
 }
 .rectangle 
 {
@@ -127,7 +127,6 @@ div#container
 }
 .rectangle#menu
 {	
-	height:6%;
 	left:0%;
 	top:0%;
 }
@@ -146,7 +145,7 @@ div#container
 }
 .rectangle ul li a
 {	
-	padding: 2% 2%;
+	padding: 0% 2%;
 	color:#fff;
 	font-size:30px;
 }
@@ -215,7 +214,7 @@ span#content
 .mainbubble
 {
 	margin: 0px auto 0px auto;
-	width: 90%;
+	width: 95%;
 	background:#FFF;
 	border-radius: 10px;
 	z-index:90;

@@ -3,7 +3,7 @@
  *
  *
  *  Computer calculates the best move by looking ahead by a specified
- * number of moves .
+ * number of moves.
  *
  * color 1 wants to take the highest of its recursive generated values,
  *	but return the lowest.

@@ -1,4 +1,4 @@
-/**
+/*
  * ConnectFourModel.java
  *
  *

@@ -1,5 +1,5 @@
 /**
- * ConnectFour.java
+ * C4A.java
  *
  * Implements ConnectFourGUI, ConnectFourModel, and Minimax to create
  *  functional Connect Four game.
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class ConnectFour extends JFrame// implements KeyListener
+public class C4A extends JApplet// implements KeyListener
 {
 		//Initial position of chip
 		private int initr = 3;
@@ -31,7 +31,11 @@ public class ConnectFour extends JFrame// implements KeyListener
     /**
      * Creates a new instance of <code>ConnectFour</code>.
      */
-   		public ConnectFour()
+     	public C4A()
+     	{
+     		init();
+     	}
+   		public void init()
    		{
    			//Panel components at top
    			JButton left = new JButton("Move Left");
@@ -50,11 +54,14 @@ public class ConnectFour extends JFrame// implements KeyListener
 			JButton newDiff = new JButton("Choose difficulty");
    			JPanel botPanel = new JPanel();
    			botPanel.setLayout(new FlowLayout());
-			chooseDiff();
 			botPanel.add(reset);
 			botPanel.add(newDiff);
 
-
+			//Mouse listener
+	/*		mouseListener mouse = new mouseListener();
+			mouse.addMouseListener(mouse);
+			mouse.addMouseMotionListener(mouse);
+*/
 
    			//Listeners for each button
    			left.addActionListener(new leftListener());
@@ -63,17 +70,17 @@ public class ConnectFour extends JFrame// implements KeyListener
 			reset.addActionListener(new resetListener());
 			newDiff.addActionListener(new newDiffListener());
 
-			//Content panel containing top panel and game boarad
-   			JPanel content = new JPanel();
+			//Content panel containing top panel and game board
+   			Container content = getContentPane();
    			content.setLayout(new BorderLayout());
    			content.add(topPanel, BorderLayout.NORTH);
    			content.add(gui, BorderLayout.CENTER);
    			content.add(botPanel, BorderLayout.SOUTH);
 
    			setContentPane(content);
-   			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   			pack();
-   			setResizable(false);
+   			//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   			validate();
+   			//setResizable(false);
     	}
 
     	class resetListener implements ActionListener
@@ -81,6 +88,11 @@ public class ConnectFour extends JFrame// implements KeyListener
     		public void actionPerformed(ActionEvent ae)
     		{
     			cfm.reset();
+    			//If no difficulty has been set, choose difficulty.
+    			if (diff==0)
+    			{
+    				chooseDiff();
+    			}
     			//Sets difficulty to given one.
     			gui.setDiff(diff);
     			//Set displayed difficulty.
@@ -114,6 +126,12 @@ public class ConnectFour extends JFrame// implements KeyListener
     	{
     		public void actionPerformed(ActionEvent ae)
     		{
+    			//If no difficulty has been set, choose difficulty.
+    			if (diff==0)
+    			{
+    				chooseDiff();
+    				gui.setDiff(diff);
+    			}
     			int col = gui.chipCol();
     			if (col <= 6 && col >0)
     			{
@@ -202,6 +220,13 @@ public class ConnectFour extends JFrame// implements KeyListener
     	{
     		public void actionPerformed(ActionEvent ae)
     		{
+    			//If no difficulty has been set, choose difficulty.
+    			if (diff==0)
+    			{
+    				chooseDiff();
+    				gui.setDiff(diff);
+    			}
+
     			int col = gui.chipCol();
     			if (col < 6 && col >=0)
     			{
@@ -217,23 +242,41 @@ public class ConnectFour extends JFrame// implements KeyListener
     	{
     		public void actionPerformed(ActionEvent ae)
     		{
+    			//If no difficulty has been set, choose difficulty.
+    			if (diff==0)
+    			{
+    				chooseDiff();
+    				gui.setDiff(diff);
+    			}
     			int col = gui.chipCol();
     			int dropRow = cfm.drop(col);
     			if (dropRow != -1)
     			{
     				gui.setCol(col);
     				gui.repaint();
-
     			}
     		}
     	}
 
-
-    /**
-     * @param args the command line arguments
-     */
-    	public static void main(String[] args)
+/*		class mouseListener extends MouseInputAdapter
     	{
-    		new ConnectFour().setVisible(true);
-  		}
+    		public void actionPerformed(ActionEvent ae)
+    		{
+    			//If no difficulty has been set, choose difficulty.
+    			if (diff==0)
+    			{
+    				chooseDiff();
+    				gui.setDiff(diff);
+    			}
+    			int col = gui.chipCol();
+    			int dropRow = cfm.drop(col);
+    			if (dropRow != -1)
+    			{
+    				gui.setCol(col);
+    				gui.repaint();
+    			}
+    		}
+    	}
+*/
+
 }
