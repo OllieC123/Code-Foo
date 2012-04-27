@@ -148,7 +148,7 @@
            (if ballUpperNumRow is even) = (ballUpperNumRow/2)*
                 /                          (ballUpperRow1+ballUpperRow2)
                /
-       ballLower        
+       ballUpper        
                \
                 \
            (else) = ((ballUpperNumRow-1)/2)*(ballUpperRow1+
