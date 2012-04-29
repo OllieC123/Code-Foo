@@ -78,7 +78,7 @@ public class Minimax
 
 
 		// If not first turn, return negamax
-		return negamax(grid,-10000,0,1);
+		return negamax(grid,-1000000,0,1);
 	}
 
 	//Recursively calls itself and returns the best col that computer should choose.
@@ -158,7 +158,7 @@ public class Minimax
 					{
 					nGrid = copyGrid(newGrid);
 					nGrid[c][r] = player;
-					int v = -negamax(nGrid,-10000,depth+1,color*-1);
+					int v = -negamax(nGrid,-1000000,depth+1,color*-1);
 					if (v >=bestValue)
 					{
 						bestPath = c;
