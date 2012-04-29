@@ -57,11 +57,6 @@ public class C4A extends JApplet// implements KeyListener
 			botPanel.add(reset);
 			botPanel.add(newDiff);
 
-			//Mouse listener
-	/*		mouseListener mouse = new mouseListener();
-			mouse.addMouseListener(mouse);
-			mouse.addMouseMotionListener(mouse);
-*/
 
    			//Listeners for each button
    			left.addActionListener(new leftListener());
@@ -76,6 +71,22 @@ public class C4A extends JApplet// implements KeyListener
    			content.add(topPanel, BorderLayout.NORTH);
    			content.add(gui, BorderLayout.CENTER);
    			content.add(botPanel, BorderLayout.SOUTH);
+			topPanel.setFocusTraversalKeysEnabled(false);
+
+			//Content keyListener
+			topPanel.setFocusable(true);
+			topPanel.addKeyListener(new keyPress());
+			left.setFocusable(true);
+			left.addKeyListener(new keyPress());
+			down.setFocusable(true);
+			down.addKeyListener(new keyPress());
+			right.setFocusable(true);
+			right.addKeyListener(new keyPress());
+			reset.setFocusable(true);
+			reset.addKeyListener(new keyPress());
+			newDiff.setFocusable(true);
+			newDiff.addKeyListener(new keyPress());
+
 
    			setContentPane(content);
    			//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,11 +94,9 @@ public class C4A extends JApplet// implements KeyListener
    			//setResizable(false);
     	}
 
-    	class resetListener implements ActionListener
-    	{
-    		public void actionPerformed(ActionEvent ae)
-    		{
-    			cfm.reset();
+		private void reset()
+		{
+				cfm.reset();
     			//If no difficulty has been set, choose difficulty.
     			if (diff==0)
     			{
@@ -109,7 +118,14 @@ public class C4A extends JApplet// implements KeyListener
     			showDiff = ("Current difficulty: HARD");
     			}
     			gui.repaint();
+		}
 
+    	class resetListener implements ActionListener
+    	{
+    		public void actionPerformed(ActionEvent ae)
+    		{
+
+				reset();
     		}
     	}
 
@@ -132,13 +148,39 @@ public class C4A extends JApplet// implements KeyListener
     				chooseDiff();
     				gui.setDiff(diff);
     			}
-    			int col = gui.chipCol();
+    			moveLeft();
+    		}
+    	}
+
+    	private void moveLeft()
+    	{
+    		int col = gui.chipCol();
     			if (col <= 6 && col >0)
     			{
     				gui.setCol(col-1);
     				gui.repaint();
     			}
-    		}
+    	}
+
+		private void moveRight()
+    	{
+    			int col = gui.chipCol();
+    			if (col < 6 && col >=0)
+    			{
+    				gui.setCol(col+1);
+    				gui.repaint();
+    			}
+    	}
+
+    	private void moveDown()
+    	{
+    		int col = gui.chipCol();
+    			int dropRow = cfm.drop(col);
+    			if (dropRow != -1)
+    			{
+    				gui.setCol(col);
+    				gui.repaint();
+    			}
     	}
 
     	//Select difficulty method.
@@ -227,12 +269,7 @@ public class C4A extends JApplet// implements KeyListener
     				gui.setDiff(diff);
     			}
 
-    			int col = gui.chipCol();
-    			if (col < 6 && col >=0)
-    			{
-    				gui.setCol(col+1);
-    				gui.repaint();
-    			}
+    			moveRight();
     		}
     	}
 
@@ -248,35 +285,52 @@ public class C4A extends JApplet// implements KeyListener
     				chooseDiff();
     				gui.setDiff(diff);
     			}
-    			int col = gui.chipCol();
-    			int dropRow = cfm.drop(col);
-    			if (dropRow != -1)
-    			{
-    				gui.setCol(col);
-    				gui.repaint();
-    			}
+    			moveDown();
     		}
     	}
 
-/*		class mouseListener extends MouseInputAdapter
+		class keyPress implements KeyListener
     	{
-    		public void actionPerformed(ActionEvent ae)
+    		//If left, down or right is pressed, redraw board.
+    		public void keyPressed(KeyEvent e)
     		{
-    			//If no difficulty has been set, choose difficulty.
+    			int keyCode = e.getKeyCode();
+    			System.out.println(keyCode);
+    			//Choose diff if no diff is set.
     			if (diff==0)
     			{
     				chooseDiff();
     				gui.setDiff(diff);
     			}
-    			int col = gui.chipCol();
-    			int dropRow = cfm.drop(col);
-    			if (dropRow != -1)
+    			// if left is pressed:
+    			if (keyCode == 37)
     			{
-    				gui.setCol(col);
-    				gui.repaint();
+
+
+    			moveLeft();
+
+    			}
+    			// if down is pressed:
+    			if (keyCode == 40)
+    			{
+    				moveDown();
+    			}
+    			// if right is pressed:
+    			if (keyCode == 39)
+    			{
+    				moveRight();
+    			}
+    			if (keyCode == 10)
+    			{
+    				reset();
     			}
     		}
+    		//Override methods
+    		public void keyTyped(KeyEvent e)
+    		{
+    		}
+    		public void keyReleased(KeyEvent e)
+    		{
+    		}
     	}
-*/
-
 }

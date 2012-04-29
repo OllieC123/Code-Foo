@@ -102,13 +102,13 @@ public class Minimax
 		cfm.setGrid(newGrid,player);
 
 		//Determine if game is over in current state;
-		// return 10000 if comp win; else return -10000
+		// return 1000000 if comp win; else return -1000000
 		if (cfm.win())
 		{
 			if (cfm.getPlayer() == 1)
-			{bestValue = color*(10000-depth);}
+			{bestValue = color*(1000000-depth);}
 			else
-			{bestValue = color*(-10000+depth);}
+			{bestValue = color*(-1000000+depth);}
 		}
 		//Determine if game is a draw
 
@@ -186,14 +186,14 @@ public class Minimax
 	// Neutral is given a score of 0.
 	// 2 in a row is 10. (00__) or (0_0_) or (0__0) or (_0_0) or (__00)
 	// Open-ended 2-in-a-row is 20. (_00_)
-	// 3 in a row is 500. (00_0) or (0_00) or (000_) or (_000)
-	// Open-ended 3-in-a-row is 1000 (_000_).
+	// 3 in a row is 1000. (00_0) or (0_00) or (000_) or (_000)
+	// Open-ended 3-in-a-row is 2000 (_000_).
 	// return sum of these values.
 
 	//Modifier
-	// Vertical = +100
-	// Diagonal = +300
-	// Horizontal = +200
+	// Vertical = *1
+	// Diagonal = *2
+	// Horizontal = *3
 	private int eval(int[][] board,int player)
 	{
 		int v = 1;
@@ -201,7 +201,7 @@ public class Minimax
 		int h = 3;
 
 		int twoIn = 10;
-		int threeIn = 500;
+		int threeIn = 1000;
 
 		int val = 0;
 		//Check for horizontal 2-in-a-row.
@@ -215,7 +215,7 @@ public class Minimax
     				board[col+2][row] == 0 &&
     				board[col+3][row] == 0)
     				{
-    					val+= twoIn+h;
+    					val+= twoIn*h;
     				}
     			//(x0x0)
     			else if (board[col][row] == player &&
@@ -223,7 +223,7 @@ public class Minimax
     				board[col+1][row] == 0 &&
     				board[col+3][row] == 0)
     				{
-    					val+= twoIn+h;
+    					val+= twoIn*h;
     				}
     			//(x00x)
     			else if (board[col][row] == player &&
@@ -231,7 +231,7 @@ public class Minimax
     				board[col+1][row] == 0 &&
     				board[col+2][row] == 0)
     				{
-    					val+= twoIn+h;
+    					val+= twoIn*h;
     				}
     			//(0xx0)
     			else if (board[col][row] == 0 &&
@@ -239,7 +239,7 @@ public class Minimax
     				board[col+2][row] == player &&
     				board[col+3][row] == 0)
     				{
-    					val+= 2*twoIn+h;
+    					val+= 2*twoIn*h;
     				}
     			//(0x0x)
     			else if (board[col][row] == 0 &&
@@ -247,7 +247,7 @@ public class Minimax
     				board[col+2][row] == 0 &&
     				board[col+3][row] == player)
     				{
-    					val+= twoIn+h;
+    					val+= twoIn*h;
     				}
     			//(00xx)
     			else if (board[col][row] == 0 &&
@@ -255,7 +255,7 @@ public class Minimax
     				board[col+2][row] == player &&
     				board[col+3][row] == player)
     				{
-    					val+= twoIn+h;
+    					val+= twoIn*h;
     				}
     		}
     	}
@@ -273,7 +273,7 @@ public class Minimax
     				board[col][row] == board[col][row-1] &&
     				board[col][row-2] == 0)
     				{
-    					val+= twoIn+v;
+    					val+= twoIn*v;
     				}
     		}
     	}
@@ -291,42 +291,42 @@ public class Minimax
     				board[col+2][row-2] == 0 &&
     				board[col+3][row-3] == 0)
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row-1] == 0 &&
     				board[col+2][row-2] == 0 &&
     				board[col][row] == board[col+3][row-3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row-1] == 0 &&
     				board[col+2][row-2] == player &&
     				board[col+3][row-3] == player)
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row-1] == player &&
     				board[col][row] == board[col+2][row-2] &&
     				board[col+1][row-1] == board[col+3][row-3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row-1] == 0 &&
     				board[col][row] == board[col+2][row-2] &&
     				board[col+1][row-1] == board[col+3][row-3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row-1] == player &&
     				board[col+1][row-1] == board[col+2][row-2] &&
     				board[col][row] == board[col+3][row-3])
     				{
-    					val+= 2500+d;
+    					val+= 2*twoIn*d;
     				}
     		}
     	}
@@ -344,42 +344,42 @@ public class Minimax
     				board[col+2][row+2] == 0 &&
     				board[col+3][row+3] == 0)
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row+1] == 0 &&
     				board[col+2][row+2] == 0 &&
     				board[col][row] == board[col+3][row+3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row+1] == 0 &&
     				board[col+2][row+2] == player &&
     				board[col+3][row+3] == player)
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row+1] == player &&
     				board[col][row] == board[col+2][row+2] &&
     				board[col+1][row+1] == board[col+3][row+3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row+1] == 0 &&
     				board[col][row] == board[col+2][row+2] &&
     				board[col+1][row+1] == board[col+3][row+3])
     				{
-    					val+= twoIn+d;
+    					val+= twoIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row+1] == player &&
     				board[col+1][row+1] == board[col+2][row+2] &&
     				board[col][row] == board[col+3][row+3])
     				{
-    					val+= 2500+d;
+    					val+= twoIn*2*d;
     				}
     		}
     	}
@@ -394,7 +394,7 @@ public class Minimax
     				board[col+2][row] == 0 &&
     				board[col][row] == board[col+3][row])
     				{
-    					val+= threeIn+h;
+    					val+= threeIn*h;
     				}
     			//(x0xx)
     			else if (board[col][row] == player &&
@@ -402,7 +402,7 @@ public class Minimax
     				board[col][row] == board[col+2][row] &&
     				board[col][row] == board[col+3][row])
     				{
-    					val+= threeIn+h;
+    					val+= threeIn*h;
     				}
     			//(0xxx)
     			else if (board[col][row] == 0 &&
@@ -410,7 +410,7 @@ public class Minimax
     				board[col+1][row] == board[col+2][row] &&
     				board[col+1][row] == board[col+3][row])
     				{
-    					val+= threeIn+h;
+    					val+= threeIn*h;
     				}
     			//(xxx0)
     			else if (board[col][row] == player &&
@@ -418,7 +418,7 @@ public class Minimax
     				board[col][row] == board[col+2][row] &&
     				board[col+3][row] == 0)
     				{
-    					val+= threeIn+h;
+    					val+= threeIn*h;
     				}
     		}
     	}
@@ -437,7 +437,7 @@ public class Minimax
     				board[col][row] == board[col][row-2] &&
     				board[col][row-3] == 0)
     				{
-    					val+= threeIn+v;
+    					val+= threeIn*v;
     				}
     		}
     	}
@@ -455,28 +455,28 @@ public class Minimax
     				board[col][row] == board[col+2][row-2] &&
     				board[col+3][row-3] == 0)
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col][row] == board[col+1][row-1] &&
     				board[col+2][row-2] == 0 &&
     				board[col][row] == board[col+3][row-3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row-1] == 0 &&
     				board[col][row] == board[col+2][row-2] &&
     				board[col][row] == board[col+3][row-3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == 0 &&
     				board[col+1][row-1] == player &&
     				board[col+1][row-1] == board[col+2][row-2] &&
     				board[col+1][row-1] == board[col+3][row-3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     		}
     	}
@@ -494,34 +494,34 @@ public class Minimax
     				board[col+1][row+1] == board[col+2][row+2] &&
     				board[col+1][row+1] == board[col+3][row+3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col+1][row+1] == 0 &&
     				board[col][row] == board[col+2][row+2] &&
     				board[col][row] == board[col+3][row+3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col][row] == board[col+1][row+1] &&
     				board[col+2][row+2] == 0 &&
     				board[col][row] == board[col+3][row+3])
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     			else if (board[col][row] == player &&
     				board[col][row] == board[col+1][row+1] &&
     				board[col][row] == board[col+2][row+2] &&
     				board[col+3][row+3] == 0)
     				{
-    					val+= threeIn+d;
+    					val+= threeIn*d;
     				}
     		}
     	}
 
     	//Check for open-ended 3-in-a-row. (0xxx0)
-    	for (int row=0;row<2;row++)
+    	for (int row=0;row<6;row++)
     	{
     		for (int col = 0;col<3;col++)
     		{
@@ -532,19 +532,26 @@ public class Minimax
     				board[col+3][row] == player &&
     				board[col][row] == board[col+4][row])
     				{
-    					val+= 2*threeIn+h;
+    					val+= 2*threeIn*h;
     				}
+    		}
+    	}
+    	for (int row=0;row<2;row++)
+    	{
+    		for (int col = 0;col<3;col++)
+    		{
     			//diag(\)
-    			else if (board[col][row] == 0 &&
+    			if (board[col][row] == 0 &&
     				board[col+1][row+1] == player &&
     				board[col][row] == board[col+2][row+2] &&
     				board[col][row] == board[col+3][row+3] &&
     				board[col+4][row+4] == 0)
     				{
-    					val+= 2*threeIn+d;
+    					val+= 2*threeIn*d;
     				}
     		}
-    	}//diag()
+    	}
+    	//diag(/)
 		for (int row=5;row>3;row--)
     		{
     			for (int col = 0;col<3;col++)
@@ -555,7 +562,7 @@ public class Minimax
     					board[col+3][row-3] == player &&
     					board[col+4][row-4] == 0)
     					{
-    						val+= 2*threeIn+d;
+    						val+= 2*threeIn*d;
     					}
     			}
     		}
