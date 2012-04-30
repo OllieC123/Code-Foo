@@ -3,6 +3,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Code-Foo2</title>
 <link href="code-foo-style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+function writeDesc(txt)
+{
+document.getElementById("desc").innerHTML=txt;
+}
+</script>
 </head>
 <body>
 <h1>
@@ -17,9 +23,7 @@
 <div class="info">
 <h2>Hello IGN!</h2>
 <p>
-This is my website design. It was created using HTML and CSS. </br></br>You can find a graphical
-representation of a hcp lattice (part of my Question 1 solution), a link to my bonus video on Youtube,
-and a Connect Four game I created as a Java applet.
+This is my website design that I created for the 2012 Code-Foo Internship. It was created using HTML, CSS and Javascript.
 </p>
 </div>
 </div>
@@ -30,10 +34,18 @@ and a Connect Four game I created as a Java applet.
 
 <div class="mainbubble">
 <div class="rectangle" id="navbar">
-<ul>
-<li><a href = "#">Section A</a></li>
-<li><a href = "#">Example Section</a></li>
-</ul>
+
+<button type="button" style="height:100%" width: 10%" 
+onclick="writeDesc('Contents include:<br><br>Answer to liquid layout question<br><br>Question 1 Companion GIF<br><br>Bonus Video<br><br>Bonus Connect Four Game<br><br>')">
+Contents</button>
+
+<button type="button" style="height:100%" width: 10%" 
+onclick="writeDesc('Joon Lee <br><br> Email: jlee23889@gmail.com <br><br> GitHub: https://github.com/jl23889/Code-Foo<br><br>')">
+Contact</button>
+
+</div>
+<div class = "info">
+<p id="desc">Click a button for more information.</p>
 </div>
 </div>
 
@@ -103,7 +115,7 @@ Enter restarts the game.</br></br>
 
 <span id="side">
 <div class="bubble" id="menu">
-<div class="rectangle" id="menu"><h2>Section A</h2></div>
+<div class="rectangle" id="menu"><h2>Code-Foo</h2></div>
 <ul>
 <li><a href = "#A">Why use a liquid layout?</a></li>
 <li><a href = "#B">Question 1</a></li>

@@ -65,7 +65,7 @@ div#container
 }
 .bubble#menu
 {
-	
+
 	margin:0% 5% 12% 5%;
 	width: 90%;
 	z-index:91;
@@ -196,7 +196,7 @@ div#main
 {
 	margin: 100px auto 100px auto; /* centered */
 	width: 90%;
-	
+
 }
 
 span#side
@@ -213,17 +213,17 @@ span#content
 }
 .mainbubble
 {
-	margin: 0px auto 0px auto;
+	margin: 0px auto 0% 3%;
 	width: 95%;
 	background:#FFF;
 	border-radius: 10px;
 	z-index:90;
-	
+	text-align: center;
 }
 
 footer
 {
 	width:100%
 	background:#FFF;
-	
+
 }
