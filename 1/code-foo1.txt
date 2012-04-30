@@ -15,7 +15,7 @@
    Type C buses currently in use and determine the average interior volume.
 
    We create a list: all Type C bus manufacturers 
-   (since 1990; for simplicity's sake, assume buses have a 20+ year life span),
+   (since 1990; for simplicity's sake, assume buses have around a 20 year life span),
    the Type C bus models of those manufacturers,
    the interior length and width of each model (both in meters),
    the height from the floor to the ceiling of each model (meters),
@@ -23,7 +23,7 @@
        too difficult and time-consuming to determine for each model; therefore
        we think of the bus as a cubic rectangle and use the interior cubic
        dimensions as a simpler alternative.
-   total number of passenger seats in each model (for simplicity's sake, assume
+   total number of passenger seats in each model (assume
    bus seats are uniform in size for all models),
    and how many of each model were sold in the USA (from 1990-present).
 
@@ -69,7 +69,7 @@
    * STEPS is a measure of the volume of the space between the steps and the
        floor.
        ** The above values are all found from a single sample of a Type C bus.
-       ** They are treated as constant for simplicity.
+       ** They are treated as constant.
 
 
 
@@ -137,7 +137,7 @@
 
        The rows are calculated slightly differently.
        ballUpperNumRow = (avgwidth-(.02/sqrt(3))-.02)/(sqrt(3)*.02)+1
-                               (rounded down)
+                               (rounded down to nearest integer)
 
            --.02/sqrt(3) is the distance from the center of lower row 1 to
            the center of upper row 1.
@@ -156,7 +156,7 @@
 
    6. Determine how many layers there are:
 
-       ballLayer = (avgheight-.02)/(sqrt(3)*.02)+1 (rounded down)
+       ballLayer = (avgheight-.02)/(sqrt(3)*.02)+1 (rounded down to nearest integer)
 
            -- Same formula as 3.
 
