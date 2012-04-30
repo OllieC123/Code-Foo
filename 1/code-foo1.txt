@@ -1,4 +1,4 @@
- 1. How many ping pong balls would it take to fill an
+1. How many ping pong balls would it take to fill an
  average-sized school bus? Describe each step in your 
  thought process.
 
@@ -98,13 +98,13 @@
        corner across.
 
 
-       ballLowerRow1 = avglength/.04 (rounded down)
+       ballLowerRow1 = avglength/.04 (rounded down to nearest int)
 
 
 
    2. Determine how many balls can fit lengthwise on the adjacent row.
 
-       ballLowerRow2 = (avglength-(.04/2))/.04 (rounded down)
+       ballLowerRow2 = (avglength-(.04/2))/.04 (rounded down to nearest int)
 
            --We subtract (.04/2) because the adjacent row begins from the
            center of the first ball in the first row; in other words,
@@ -112,9 +112,9 @@
        
    3. Determine how many rows can fit by width.
        
-       ballLowerNumRow = (avgwidth-.02)/(sqrt(3)*.02)+1 (rounded down)
+       ballLowerNumRow = (avgwidth-.02)/(sqrt(3)*.02)+1 (rounded down to nearest int)
 
-           --sqrt(3)*.02 is the distance from the center of row 1 to the
+           --sqrt(3)*.02 is the horizontal (bus-widthwise) distance from the center of row 1 to the
            center of row 2.
 
    4. Determine the total number of balls that can fit on the floor.
@@ -139,7 +139,7 @@
        ballUpperNumRow = (avgwidth-(.02/sqrt(3))-.02)/(sqrt(3)*.02)+1
                                (rounded down to nearest integer)
 
-           --.02/sqrt(3) is the distance from the center of lower row 1 to
+           --.02/sqrt(3) is the horizontal (bus-widthwise) distance from the center of lower row 1 to
            the center of upper row 1.
 
        Total number of balls that can fit on the upper layer:
@@ -156,9 +156,11 @@
 
    6. Determine how many layers there are:
 
-       ballLayer = (avgheight-.02)/(sqrt(3)*.02)+1 (rounded down to nearest integer)
+       ballLayer = (avgheight-(.02)/(.04*sqrt(6)/3)+1 (rounded down to nearest integer)
 
-           -- Same formula as 3.
+	--Height of regular tetrahedron with edge length .04 = .04*sqrt(6)/3
+	--This is the vertical distance from the center of lower row 1 to the center of upper row 1.
+
 
    7. Calculate total balls that can fit.
 
@@ -171,7 +173,6 @@
            (else) = ((ballLayer-1)/2)*(ballUpperRow1+
                        ballUpperRow2)+ballLower
 
-           -- Same formula as 4.
 
 
 
@@ -187,4 +188,4 @@
 
    adjustedBallTotal = ballTotal*(avgadjvolume/avgvolume)
 
- This should give us our final (approximated) answer!   
+ This should give us our final (approximated) answer!  
