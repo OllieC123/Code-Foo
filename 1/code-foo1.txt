@@ -136,7 +136,7 @@
        ballUpperRow2 = ballLowerRow1
 
        The rows are calculated slightly differently.
-       ballUpperNumRow = (avgwidth-(.02/sqrt(3))-.02)/(sqrt(3)*.02)+1
+       ballUpperNumRow = (avgwidth-.02-(.02/sqrt(3)))/(sqrt(3)*.02)+1
                                (rounded down to nearest integer)
 
            --.02/sqrt(3) is the horizontal (bus-widthwise) distance from the center of lower row 1 to
@@ -170,8 +170,8 @@
        ballTotal        
                \
                 \
-           (else) = ((ballLayer-1)/2)*(ballUpperRow1+
-                       ballUpperRow2)+ballLower
+           (else) = ((ballLayer-1)/2)*(ballLower+
+                       ballUpper)+ballLower
 
 
 
